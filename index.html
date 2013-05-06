@@ -1,0 +1,116 @@
+<html>
+<head>
+  <title>Alan's workout timer.</title>
+  <style type="text/css">
+  #mainBody{
+    background:#cccccc; 
+    text-align:center;
+    font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+  }
+  #content{
+    padding: 10% 0;
+  }
+  #theTime{
+    font-size:100px;
+  }
+  #startButton{
+    padding:20px;
+    font-size:20px;
+  }
+  @media (max-width:500px) {
+    #theTime{
+      font-size:20px;
+    }
+    #content{
+      padding:0px;
+    }
+    #mainBody{
+      font: 10px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    }
+
+  }
+
+  </style>
+</head>
+<body id="mainBody">
+  <div id="content">
+    <button id="startButton" onClick="startTimer(20)">Start Workout</button>
+    <p id="theTime"></p>
+    <div id="progressBar">
+      <p id="currentDistance"></p>
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript">
+var totalCycles = 0;
+var maxCycles;
+var theDistance = "";
+
+function startTimer (workoutLength)
+{
+  maxCycles = 3*workoutLength;
+  document.getElementById("startButton").style.display = "none";
+
+  var i = 0;
+  while(i<maxCycles)
+  {
+    theDistance += " &#9655 ";
+    i++;
+  }
+  document.getElementById("currentDistance").innerHTML = theDistance;
+  myTimer(20);
+}
+
+function sprint ( )
+{
+  document.getElementById("mainBody").style.background = "#ED4337";  
+}
+
+function rest ( )
+{
+  document.getElementById("mainBody").style.background = "#C0D890";
+}
+
+function done ( )
+{
+  document.getElementById("theTime").innerHTML="DONE"
+  document.getElementById("mainBody").style.background = "#cccccc";
+}
+
+function myTimer(myWorkoutLength)
+{
+  if(totalCycles < maxCycles)
+  {
+    if(myWorkoutLength <= 0)
+    {
+      myWorkoutLength = 20;
+      totalCycles++;
+      theDistance = theDistance.substring(0, theDistance.length-8);
+      theDistance = " &#9654; " + theDistance;
+      document.getElementById("currentDistance").innerHTML = theDistance;
+    }
+
+    document.getElementById("theTime").innerHTML=myWorkoutLength;
+    if(myWorkoutLength > 12)
+    {
+      sprint();
+    }
+    else{
+      rest();
+    }
+    myWorkoutLength--;
+
+    var timer = setTimeout(function(){myTimer(myWorkoutLength)},1000);  
+  }
+  else{
+    theDistance = theDistance.substring(0, theDistance.length-8);
+    theDistance = " &#9654; " + theDistance;
+    document.getElementById("currentDistance").innerHTML = theDistance;
+
+    done();
+  }
+}
+
+</script>
+</html>
