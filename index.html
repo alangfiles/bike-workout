@@ -65,6 +65,7 @@ function startTimer (workoutLength)
 function sprint ( )
 {
   //set sound
+  highNoise();
 
   //set background
   document.getElementById("mainBody").style.background = "#ED4337";  
@@ -73,13 +74,14 @@ function sprint ( )
 function rest ( )
 {
   //set sound
-  
+  lowNoise();
   //set background
   document.getElementById("mainBody").style.background = "#C0D890";
 }
 
 function done ( )
 {
+  stopNoise();
   document.getElementById("theTime").innerHTML="DONE"
   document.getElementById("mainBody").style.background = "#cccccc";
 }
@@ -89,13 +91,13 @@ var osc = ctx.createOscillator();
     osc.type = "sine";
 
 function lowNoise() {    
-  osc.frequency = 100;
+  osc.frequency = 80;
   osc.start(0);
   osc.connect(ctx.destination);    
 }
 
 function highNoise() {    
-  osc.frequency = 100;
+  osc.frequency = 120;
   osc.start(0);
   osc.connect(ctx.destination);
 }
