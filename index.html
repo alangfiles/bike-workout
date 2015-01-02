@@ -49,6 +49,7 @@ var theDistance = "";
 
 function startTimer (workoutLength)
 {
+  osc.start(0);
   maxCycles = 3*workoutLength;
   document.getElementById("startButton").style.display = "none";
 
@@ -89,28 +90,26 @@ function done ( )
 var ctx = new webkitAudioContext();
 var osc = ctx.createOscillator();
     osc.type = "sine";
+    osc.frequency = 80;
+    osc.connect(ctx.destination);    
 
 
 function lowNoise() {    
   osc.frequency = 80;
-  
-  osc.connect(ctx.destination);    
 }
 
 function highNoise() {    
   osc.frequency = 120;
-  osc.connect(ctx.destination);
 }
 
 function stopNoise() {    
     osc.stop(0);
-    osc.connect(ctx.destination);
 }
 
 
 function myTimer(myWorkoutLength)
 {
-  osc.start(0);
+  
   if(totalCycles < maxCycles)
   {
     if(myWorkoutLength <= 0)
