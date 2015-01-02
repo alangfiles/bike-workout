@@ -90,16 +90,16 @@ function done ( )
 var ctx = new webkitAudioContext();
 var osc = ctx.createOscillator();
     osc.type = "sine";
-    osc.frequency = 80;
+    osc.frequency.value = 80;
     osc.connect(ctx.destination);    
 
 
 function lowNoise() {    
-  osc.frequency = 80;
+  osc.frequency.value = 80;
 }
 
 function highNoise() {    
-  osc.frequency = 120;
+  osc.frequency.value = 120;
 }
 
 function stopNoise() {    
