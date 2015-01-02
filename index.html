@@ -64,11 +64,17 @@ function startTimer (workoutLength)
 
 function sprint ( )
 {
+  //set sound
+
+  //set background
   document.getElementById("mainBody").style.background = "#ED4337";  
 }
 
 function rest ( )
 {
+  //set sound
+  
+  //set background
   document.getElementById("mainBody").style.background = "#C0D890";
 }
 
@@ -77,6 +83,31 @@ function done ( )
   document.getElementById("theTime").innerHTML="DONE"
   document.getElementById("mainBody").style.background = "#cccccc";
 }
+
+var ctx = new webkitAudioContext();
+var osc = ctx.createOscillator();
+    osc.type = "sine";
+    osc.frequency = 100;
+    osc.start(0);
+    osc.connect(ctx.destination);
+
+function lowNoise() {    
+  osc.frequency = 100;
+  osc.start(0);
+  osc.connect(ctx.destination);    
+}
+
+function highNoise() {    
+  osc.frequency = 100;
+  osc.start(0);
+  osc.connect(ctx.destination);
+}
+
+function stopNoise() {    
+    osc.stop(0);
+    osc.connect(ctx.destination);
+}
+
 
 function myTimer(myWorkoutLength)
 {
