@@ -90,15 +90,15 @@ var ctx = new webkitAudioContext();
 var osc = ctx.createOscillator();
     osc.type = "sine";
 
+
 function lowNoise() {    
   osc.frequency = 80;
-  osc.start(0);
+  
   osc.connect(ctx.destination);    
 }
 
 function highNoise() {    
   osc.frequency = 120;
-  osc.start(0);
   osc.connect(ctx.destination);
 }
 
@@ -110,6 +110,7 @@ function stopNoise() {
 
 function myTimer(myWorkoutLength)
 {
+  osc.start(0);
   if(totalCycles < maxCycles)
   {
     if(myWorkoutLength <= 0)
